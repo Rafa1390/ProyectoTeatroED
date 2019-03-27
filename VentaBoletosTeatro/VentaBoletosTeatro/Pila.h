@@ -12,10 +12,9 @@ public:
 	void sumarLongitud();
 	void restarLongitud();
 	int getLongitud();
-	void insertarElem(int);
-	int RetirarElemTope();
-	Pila pilaEnt();
-	int topePila();
+	void insertarElem(Espacio);
+	Espacio RetirarElemTope();
+	Espacio topePila();
 	bool esVaciaPila();
 	void mostrarPila();
 

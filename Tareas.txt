@@ -1,4 +1,8 @@
-Tareas de Rafa:
+* Tareas de Rafa:
+
+  VIP y la graderia general.
 
 
-Tareas de Dennis:
+* Tareas de Dennis:
+
+  Pila de la graderia preferencial.
