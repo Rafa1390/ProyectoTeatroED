@@ -6,14 +6,17 @@
 #include <string>
 #include "ListaEspacios.h"
 #include "Espacio.h"
+#include "Pila.h"
 using namespace std;
 
 void reservarEspacio();
 void reservarVIP();
+void reservarPreferencial();
 void reservarGeneral();
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
+Pila *graderiaPreferencial = new Pila();
 
 int main()
 {
@@ -71,7 +74,7 @@ void reservarEspacio() {
 			reservarVIP();
 			break;
 		case 2:
-			//reservarPreferencial
+			reservarPreferencial();
 			break;
 		case 3:
 			reservarGeneral();
@@ -110,6 +113,11 @@ void reservarVIP() {
 	}
 	
 }
+
+void reservarPreferencial() {
+
+}
+
 
 void reservarGeneral() {
 
