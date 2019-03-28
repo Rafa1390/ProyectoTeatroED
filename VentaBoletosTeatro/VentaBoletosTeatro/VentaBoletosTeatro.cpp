@@ -17,6 +17,7 @@ void reservarGeneral();
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
 Pila *graderiaPreferencial = new Pila();
+int contGeneral = 1;
 
 int main()
 {
@@ -96,17 +97,24 @@ void reservarVIP() {
 		do {
 			cout << "\nDigite el numero del espacio que desea reservar" << endl;
 			cin >> numEsp;
-			disp = ListaVIP->EsDisponible(numEsp);
-			if (disp == true) {
-				cout << "\nDigite el nombre de quien realiza la reserva" << endl;
-				cin >> nombre;
-				Espacio espacio(numEsp, "Reservado", "VIP", 7000, nombre);
-				ListaVIP->ReservarEspacioVIP(espacio);
+			if (numEsp > 0 || numEsp <= 10) {
+				disp = ListaVIP->EsDisponible(numEsp);
+				if (disp == true) {
+					cout << "\nDigite el nombre de quien realiza la reserva" << endl;
+					cin >> nombre;
+					Espacio espacio(numEsp, "Reservado", "VIP", 7000, nombre);
+					ListaVIP->ReservarEspacioVIP(espacio);
+				}
+				else {
+					cout << "\nEl espacio ingresado ya se encuentra reservado" << endl;
+				}
 			}
 			else {
-				cout << "\nEl espacio ingresado ya se encuentra reservado" << endl;
+				cout << "\nLa zona VIP solo cuenta con 10 espacios." << endl;
+				cout << "Por favor ingrese un numero del 1 al 10." << endl;
 			}
-		} while (disp == false);
+			
+		} while (disp == false || numEsp < 0 || numEsp > 10);
 	}
 	else {
 		cout << "\nYa no hay espacios en la zona VIP" << endl;
@@ -120,5 +128,17 @@ void reservarPreferencial() {
 
 
 void reservarGeneral() {
+	string nombre;
 
+	cout << "\n---General---" << endl;
+	if (ListaGeneral->GetLong() <= 50) {
+		cout << "\nDigite el nombre de quien realiza la reserva" << endl;
+		cin >> nombre;
+		Espacio espacio(contGeneral, "Reservado", "General", 4000, nombre);
+		ListaVIP->ReservarEspacioVIP(espacio);
+		contGeneral++;
+	}
+	else {
+		cout << "\nYa no hay espacios en la zona General" << endl;
+	}
 }
