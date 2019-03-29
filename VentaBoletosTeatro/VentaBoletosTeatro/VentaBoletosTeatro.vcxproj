@@ -151,16 +151,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Cola.h" />
     <ClInclude Include="Espacio.h" />
     <ClInclude Include="ListaEspacios.h" />
     <ClInclude Include="Nodo.h" />
+    <ClInclude Include="NodoCola.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Pila.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cola.cpp" />
     <ClCompile Include="Espacio.cpp" />
     <ClCompile Include="ListaEspacios.cpp" />
     <ClCompile Include="Nodo.cpp" />
+    <ClCompile Include="NodoCola.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

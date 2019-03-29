@@ -7,6 +7,7 @@
 #include "ListaEspacios.h"
 #include "Espacio.h"
 #include "Pila.h"
+#include "Cola.h"
 #include <string>
 using namespace std;
 
@@ -20,6 +21,7 @@ void pagarGeneral();
 void liberarReservas();
 void mostrarEspacios();
 void iniciarFuncion();
+void enviarACola();
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
@@ -33,7 +35,10 @@ Pila *graderia2_2 = new Pila();
 Pila *graderia2_3 = new Pila();
 Pila *graderia2_4 = new Pila();
 Pila *graderia2_5 = new Pila();
+Cola *colaClientes = new Cola();
+
 int contGeneral = 1;
+bool reservasLib = false;
 
 int main()
 {
@@ -77,7 +82,7 @@ int main()
 			break;
 		case 8:
 			breaker = 1;
-			std::cout << "Gracias por usar nuestra servicio, lo esperamos pronto." << endl;
+			std::cout << "Gracias por usar nuestro servicio, lo esperamos pronto." << endl;
 			break;
 
 		}
@@ -117,7 +122,7 @@ void reservarVIP() {
 	string nombre;
 
 	cout << "\n---VIP---" << endl;
-	if (ListaVIP->GetLong() <= 10) {
+	if (ListaVIP->GetLong() < 10) {
 		do {
 			cout << "\nDigite el numero del espacio que desea reservar" << endl;
 			cin >> numEsp;
@@ -142,6 +147,7 @@ void reservarVIP() {
 	}
 	else {
 		cout << "\nYa no hay espacios en la zona VIP" << endl;
+		enviarACola();
 	}
 	
 }
@@ -322,7 +328,7 @@ void reservarGeneral() {
 	int num;
 
 	cout << "\n---General---" << endl;
-	if (ListaGeneral->GetLong() <= 50) {
+	if (ListaGeneral->GetLong() < 50) {
 		cout << "\nDigite el nombre de quien realiza la reserva" << endl;
 		cin >> nombre;
 		Espacio espacio(contGeneral, "Reservado", "General", 4000, nombre);
@@ -420,10 +426,16 @@ void pagarGeneral() {
 }
 
 void liberarReservas() {
-	ListaVIP->LiberarReservas();
-	//Liberar reservas preferencial
-	ListaGeneral->LiberarReservas();
-	cout << "\nReservas liberadas" << endl;
+	if (ListaVIP->GetCabeza() != NULL && ListaGeneral->GetCabeza() != NULL /*preferencial*/) {
+		ListaVIP->LiberarReservas();
+		//Liberar reservas preferencial
+		ListaGeneral->LiberarReservas();
+		reservasLib = true;
+		cout << "\nReservas liberadas" << endl;
+	}
+	else {
+		cout << "\nAun no se han realizado reservaciones" << endl;
+	}
 }
 
 void mostrarEspacios() {
@@ -449,4 +461,27 @@ void iniciarFuncion() {
 	cout << "Monto total vendido en la zona: " << ListaGeneral->GetMontoTotal() << " colones" << endl;
 
 	cout << "\n----Monto total recaudado en la funcion: " << ListaVIP->GetMontoTotal() + ListaGeneral->GetMontoTotal()/*+ preferencial*/ << " colones----" << endl;
+}
+
+void enviarACola() {
+	int resp;
+	string nombre;
+	do {
+		cout << "\n¿Desea esperar a que se libere una reserva para poder ingresar al teatro?" << endl;
+		cout << "1. Si" << endl;
+		cout << "2. No" << endl;
+		cin >> resp;
+
+		if (resp == 1) {
+			cout << "\nDigite el nombre del cliente para ingresarlo a la cola" << endl;
+			cin >> nombre;
+			colaClientes->insertarCliente(nombre);
+		}
+		else if (resp == 2) {
+			cout << "Gracias por preferirnos" << endl;
+		}
+		else {
+			cout << "Opcion incorrecta" << endl;
+		}
+	} while (resp < 1 || resp > 2);
 }
