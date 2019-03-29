@@ -7,6 +7,7 @@
 #include "ListaEspacios.h"
 #include "Espacio.h"
 #include "Pila.h"
+#include <string>
 using namespace std;
 
 void reservarEspacio();
@@ -19,7 +20,8 @@ void pagarGeneral();
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
-Pila *graderiaPreferencial = new Pila();
+Pila *graderiaPreferencialIzquierda = new Pila();
+Pila *graderiaPreferencialDerecha = new Pila();
 int contGeneral = 1;
 
 int main()
@@ -127,6 +129,43 @@ void reservarVIP() {
 }
 
 void reservarPreferencial() {
+	int lector = 0;
+	cout << "\n---Preferenciales---" << endl<<
+		"Por favor seleccionar una de las graderias preferenciales:"<< endl
+		<<"1. A la derecha del escenario." << endl
+		<< "2. A la derecha del escenario." << endl;
+	try {
+		cin >> lector;
+	}
+	catch (exception e) {
+		lector = 3;
+	}
+	
+	switch (lector) {
+
+	case 1:
+
+	if (graderiaPreferencialIzquierda->getLongitud() <=25) {
+		cout << "\nGraderia preferencial 1" << endl;
+	}
+		break;
+
+	case 2:
+
+	if (graderiaPreferencialIzquierda->getLongitud() <= 25) {
+		cout << "\nGraderia preferencial 2" << endl;
+	}
+		break;
+
+	default:
+
+		cout << "Opcion no valida" << endl;
+
+		break;
+
+	}
+
+	
 
 }
 
