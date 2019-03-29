@@ -20,8 +20,16 @@ void pagarGeneral();
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
-Pila *graderiaPreferencialIzquierda = new Pila();
-Pila *graderiaPreferencialDerecha = new Pila();
+Pila *graderia1_1 = new Pila();
+Pila *graderia1_2 = new Pila();
+Pila *graderia1_3 = new Pila();
+Pila *graderia1_4 = new Pila();
+Pila *graderia1_5 = new Pila();
+Pila *graderia2_1 = new Pila();
+Pila *graderia2_2 = new Pila();
+Pila *graderia2_3 = new Pila();
+Pila *graderia2_4 = new Pila();
+Pila *graderia2_5 = new Pila();
 int contGeneral = 1;
 
 int main()
@@ -95,6 +103,7 @@ void reservarEspacio() {
 
 void reservarVIP() {
 	int numEsp;
+	int fila;
 	bool disp = false;
 	string nombre;
 
@@ -130,11 +139,12 @@ void reservarVIP() {
 
 void reservarPreferencial() {
 	int lector = 0;
+	int fila = 3;
 	string nombre = "";
 	cout << "\n---Preferenciales---" << endl<<
 		"Por favor seleccionar una de las graderias preferenciales:"<< endl
 		<<"1. A la derecha del escenario." << endl
-		<< "2. A la derecha del escenario." << endl;
+		<< "2. A la izquierda del escenario." << endl;
 	try {
 		cin >> lector;
 	}
@@ -145,35 +155,34 @@ void reservarPreferencial() {
 	switch (lector) {
 
 	case 1:
+		cout << "\nGraderia preferencial 1" << endl << endl << 
+			"Ingrese la fila en la que desea reservar: 1,2,3,4 o 5." << endl;
+		try {
+			cout << "Ingrese su nombre:" << endl;
+			cin >> nombre;
+			cin >> fila;
+			Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
+			reservarGraderia1(temp, fila, nombre);
 
-	if (graderiaPreferencialDerecha->getLongitud() <=25) {
-		cout << "\nGraderia preferencial 1" << endl <<
-			"Ingrese su nombre" << endl;
-		cin >> nombre;
-		Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
-		graderiaPreferencialDerecha->insertarElem(*temp);
-		contGeneral++;
-		graderiaPreferencialDerecha->mostrarPila();
-	}
-	else {
-		cout << "No quedan espacios disponibles en la graderia 1." << endl;
-	}
+		}
+		catch (exception e) {
+			cout << "Ha ocurrido un error, por favor intentelo de nuevo.";
+		}
 		break;
 
 	case 2:
-
-	if (graderiaPreferencialIzquierda->getLongitud() <= 25) {
-		cout << "\nGraderia preferencial 2" << endl <<
-			"Ingrese su nombre" << endl;
-		cin >> nombre;
-		Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
-		graderiaPreferencialIzquierda->insertarElem(*temp);
-		contGeneral++;
-		graderiaPreferencialIzquierda->mostrarPila();
-	}
-	else {
-		cout << "No quedan espacios disponibles en la graderia 2." << endl;
-	}
+		cout << "\nGraderia preferencial 2" << endl << endl <<
+			"Ingrese la fila en la que desea reservar: 1,2,3,4 o 5." << endl;
+		try {
+			cout << "Ingrese su nombre:" << endl;
+			cin >> nombre;
+			cin >> fila;
+			Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
+			reservarGraderia1(temp, fila, nombre);
+		}
+		catch (exception e) {
+			cout << "Ha ocurrido un error, por favor intentelo de nuevo.";
+		}
 		break;
 
 	default:
@@ -181,9 +190,122 @@ void reservarPreferencial() {
 		break;
 
 	}
+}
 
-	
+void reservarGraderia1(Espacio *temp, int fila, string nombre) {
+	switch (fila) {
+	case 1:
+		if (graderia1_1->getLongitud() < 5) {
+			graderia1_1->insertarElem(*temp);
+			contGeneral++;
+			graderia1_1->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	case 2:
+		if (graderia1_2->getLongitud() < 5) {
+			graderia1_2->insertarElem(*temp);
+			contGeneral++;
+			graderia1_2->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	case 3:
+		if (graderia1_3->getLongitud() < 5) {
+			graderia1_3->insertarElem(*temp);
+			contGeneral++;
+			graderia1_3->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	case 4:
+		if (graderia1_4->getLongitud() < 5) {
+			graderia1_4->insertarElem(*temp);
+			contGeneral++;
+			graderia1_4->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	case 5:
+		if (graderia1_5->getLongitud() < 5) {
+			graderia1_5->insertarElem(*temp);
+			contGeneral++;
+			graderia1_5->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	default:
+		break;
+	}
+}
 
+void reservarGraderia2(Espacio *temp, int fila, string nombre) {
+	switch (fila) {
+	case 1:
+
+		if (graderia2_1->getLongitud() < 5) {
+			graderia2_1->insertarElem(*temp);
+			contGeneral++;
+			graderia2_1->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	case 2:
+		if (graderia2_2->getLongitud() < 5) {
+			graderia2_2->insertarElem(*temp);
+			contGeneral++;
+			graderia2_2->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+
+		break;
+	case 3:
+		if (graderia2_3->getLongitud() < 5) {
+			graderia2_3->insertarElem(*temp);
+			contGeneral++;
+			graderia2_3->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	case 4:
+		if (graderia2_4->getLongitud() < 5) {
+			graderia2_4->insertarElem(*temp);
+			contGeneral++;
+			graderia2_4->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	case 5:
+		if (graderia2_5->getLongitud() < 5) {
+			graderia2_5->insertarElem(*temp);
+			contGeneral++;
+			graderia2_5->mostrarPila();
+		}
+		else {
+			cout << "Lo sentimos esta fila esta llena." << endl;
+		}
+		break;
+	default:
+		break;
+	}
 }
 
 void reservarGeneral() {
