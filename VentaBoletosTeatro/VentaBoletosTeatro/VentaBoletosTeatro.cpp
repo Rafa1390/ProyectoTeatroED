@@ -40,10 +40,7 @@ Pila *graderia2_2 = new Pila();
 Pila *graderia2_3 = new Pila();
 Pila *graderia2_4 = new Pila();
 Pila *graderia2_5 = new Pila();
-<<<<<<< HEAD
 Cola *colaClientes = new Cola();
-
-=======
 
 Pila *graderia1_1Pagado = new Pila();
 Pila *graderia1_2Pagado = new Pila();
@@ -55,8 +52,8 @@ Pila *graderia2_2Pagado = new Pila();
 Pila *graderia2_3Pagado = new Pila();
 Pila *graderia2_4Pagado = new Pila();
 Pila *graderia2_5Pagado = new Pila();
->>>>>>> 9f9a08316bbdfbfa92964bc7128635fe37fc6511
-int contGeneral = 1;
+
+int contGeneral = 1, contGradGeneral = 1;
 bool reservasLib = false;
 
 int main()
@@ -354,9 +351,9 @@ void reservarGeneral() {
 	if (ListaGeneral->GetLong() < 50) {
 		cout << "\nDigite el nombre de quien realiza la reserva" << endl;
 		cin >> nombre;
-		Espacio espacio(contGeneral, "Reservado", "General", 4000, nombre);
+		Espacio espacio(contGradGeneral, "Reservado", "General", 4000, nombre);
 		num = ListaGeneral->ReservarGradGeneral(espacio);
-		contGeneral++;
+		contGradGeneral++;
 		cout << "\n" << nombre << " ha reservado en el espacio n" << num << "\n" << endl;
 	}
 	else {
