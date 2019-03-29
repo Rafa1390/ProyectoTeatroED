@@ -171,7 +171,7 @@ void reservarPreferencial() {
 			cin >> nombre;
 			cin >> fila;
 			Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
-			//reservarGraderia1(temp, fila, nombre);
+			reservarGraderia1(temp, fila, nombre);
 
 		}
 		catch (exception e) {
@@ -187,7 +187,7 @@ void reservarPreferencial() {
 			cin >> nombre;
 			cin >> fila;
 			Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
-			//reservarGraderia1(temp, fila, nombre);
+			reservarGraderia1(temp, fila, nombre);
 		}
 		catch (exception e) {
 			cout << "Ha ocurrido un error, por favor intentelo de nuevo.";
