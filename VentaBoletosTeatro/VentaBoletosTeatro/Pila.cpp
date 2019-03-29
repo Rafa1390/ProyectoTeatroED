@@ -21,11 +21,11 @@ Nodo* Pila::getCabeza() {
 
 void Pila::insertarElem(Espacio x) {
 	Nodo * aux;
-	aux = new Nodo();
+	aux = new Nodo(x);
 
 	aux->SetSig(getCabeza());
 	setCabeza(aux);
-	cout << endl << "Elemento ingresado en la pila." << endl << endl;
+	cout << endl << "Espacio reservado exitosamente." << endl << endl;
 	sumarLongitud();
 }
 

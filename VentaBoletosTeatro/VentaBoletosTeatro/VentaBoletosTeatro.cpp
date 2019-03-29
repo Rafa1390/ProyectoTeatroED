@@ -130,6 +130,7 @@ void reservarVIP() {
 
 void reservarPreferencial() {
 	int lector = 0;
+	string nombre = "";
 	cout << "\n---Preferenciales---" << endl<<
 		"Por favor seleccionar una de las graderias preferenciales:"<< endl
 		<<"1. A la derecha del escenario." << endl
@@ -145,22 +146,38 @@ void reservarPreferencial() {
 
 	case 1:
 
-	if (graderiaPreferencialIzquierda->getLongitud() <=25) {
-		cout << "\nGraderia preferencial 1" << endl;
+	if (graderiaPreferencialDerecha->getLongitud() <=25) {
+		cout << "\nGraderia preferencial 1" << endl <<
+			"Ingrese su nombre" << endl;
+		cin >> nombre;
+		Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
+		graderiaPreferencialDerecha->insertarElem(*temp);
+		contGeneral++;
+		graderiaPreferencialDerecha->mostrarPila();
+	}
+	else {
+		cout << "No quedan espacios disponibles en la graderia 1." << endl;
 	}
 		break;
 
 	case 2:
 
 	if (graderiaPreferencialIzquierda->getLongitud() <= 25) {
-		cout << "\nGraderia preferencial 2" << endl;
+		cout << "\nGraderia preferencial 2" << endl <<
+			"Ingrese su nombre" << endl;
+		cin >> nombre;
+		Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
+		graderiaPreferencialIzquierda->insertarElem(*temp);
+		contGeneral++;
+		graderiaPreferencialIzquierda->mostrarPila();
+	}
+	else {
+		cout << "No quedan espacios disponibles en la graderia 2." << endl;
 	}
 		break;
 
 	default:
-
 		cout << "Opcion no valida" << endl;
-
 		break;
 
 	}
