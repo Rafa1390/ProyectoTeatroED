@@ -252,5 +252,24 @@ void pagarVIP() {
 }
 
 void pagarGeneral() {
+	int num;
+	bool disp = true;
 
+	do {
+		cout << "\nDigite el numero del espacio en el que hizo la reservacion" << endl;
+		cin >> num;
+		if (num >= 1 || num <= 50) {
+			disp = ListaGeneral->EsDisponible(num);
+			if (disp == false) {
+				ListaGeneral->PagarEspacioReservado(num);
+			}
+			else {
+				cout << "\nEl numero del espacio ingresado no se encuentra en reserva" << endl;
+			}
+		}
+		else {
+			cout << "\nEl numero que ingreso es incorrecto" << endl;
+			cout << "Por favor ingrese un numero del 1 al 50" << endl;
+		}
+	} while (num < 1 || num > 50 || disp == true);
 }
