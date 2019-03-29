@@ -17,6 +17,8 @@ void reservarGeneral();
 void pagarReservacion();
 void pagarVIP();
 void pagarGeneral();
+void liberarReservas();
+void mostrarEspacios();
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
@@ -36,9 +38,10 @@ int main()
 			<< "2. Pagar reservacion realizada." << endl
 			<< "3. Liberar reservaciones." << endl
 			<< "4. Iniciar la Funcion." << endl
-			<< "5. Mostrar teatro./Extra" << endl
-			<< "6. Mostrar teatro(modo grafico)./extra" << endl
-			<< "7. Salir." << endl << endl
+			<< "5. Mostrar espacios" << endl
+			<< "6. Mostrar teatro./Extra" << endl
+			<< "7. Mostrar teatro(modo grafico)./extra" << endl
+			<< "8. Salir." << endl << endl
 			<< "============================" << endl;
 
 		std::cin >> lectura;
@@ -51,14 +54,18 @@ int main()
 			pagarReservacion();
 			break;
 		case 3:
+			liberarReservas();
 			break;
 		case 4:
 			break;
 		case 5:
+			mostrarEspacios();
 			break;
 		case 6:
 			break;
 		case 7:
+			break;
+		case 8:
 			breaker = 1;
 			std::cout << "Gracias por usar nuestra servicio, lo esperamos pronto." << endl;
 			break;
@@ -255,4 +262,22 @@ void pagarGeneral() {
 			cout << "Por favor ingrese un numero del 1 al 50" << endl;
 		}
 	} while (num < 1 || num > 50 || disp == true);
+}
+
+void liberarReservas() {
+	ListaVIP->LiberarReservas();
+	//Liberar reservas preferencial
+	ListaGeneral->LiberarReservas();
+	cout << "\nReservas liberadas" << endl;
+}
+
+void mostrarEspacios() {
+	cout << "\n----Zona VIP----" << endl;
+	cout << "******************" << endl;
+	ListaVIP->MostrarEspaciosLista();
+	cout << "******************" << endl;
+	cout << "\n----Zona General----" << endl;
+	cout << "******************" << endl;
+	ListaGeneral->MostrarEspaciosLista();
+	cout << "******************" << endl;
 }
