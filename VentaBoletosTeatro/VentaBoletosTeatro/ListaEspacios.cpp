@@ -67,9 +67,10 @@ void ListaEspacios::ReservarEspacioVIP(Espacio esp) {
 	longitud++;
 }
 
-void ListaEspacios::ReservarGradGeneral(Espacio esp) {
+int ListaEspacios::ReservarGradGeneral(Espacio esp) {
 	Nodo * aux;
 	aux = new Nodo(esp);
+	int num = esp.GetNumEspacio();
 
 	if (GetCabeza() == NULL) {
 		SetCabeza(aux);
@@ -81,17 +82,20 @@ void ListaEspacios::ReservarGradGeneral(Espacio esp) {
 	}
 
 	longitud++;
+	return num;
 }
 
 bool ListaEspacios::PagarEspacioReservado(int pNum) {
 	Nodo * aux = GetCabeza();
-	Nodo * info = NULL;
+	Espacio info;
 	bool realizado = false;
 
 	while (aux != NULL) {
 
 		if (aux->GetEspacio().GetNumEspacio() == pNum) {
-			aux->GetEspacio().SetEstado("Pagado");
+			info = aux->GetEspacio();
+			info.SetEstado("Pagado");
+			aux->SetEspacio(info);
 			pagados++;
 			montoTotal = montoTotal + aux->GetEspacio().GetCosto();
 			realizado = true;
@@ -104,11 +108,16 @@ bool ListaEspacios::PagarEspacioReservado(int pNum) {
 
 void ListaEspacios::LiberarReservas() {
 	Nodo * aux = GetCabeza();
+	Espacio info;
 
 	while (aux != NULL) {
 		if (aux->GetEspacio().GetEstado() == "Reservado") {
-			aux->GetEspacio().SetEstado("Libre");
+			info = aux->GetEspacio();
+			info.SetEstado("Libre");
+			info.SetNombre("Sin nombre");
+			aux->SetEspacio(info);
 		}
+		aux = aux->GetSig();
 	}
 }
 
@@ -126,7 +135,7 @@ bool ListaEspacios::EsDisponible(int num) {
 	return disp;
 }
 
-void ListaEspacios::MostrarEspaciosLista() {
+void ListaEspacios::MostrarEspaciosVIP() {
 	Nodo * aux = GetCabeza();
 	Espacio info;
 
@@ -137,5 +146,13 @@ void ListaEspacios::MostrarEspaciosLista() {
 		cout << "\n-------------------\n";
 
 		aux = aux->GetSig();
+	}
+}
+
+void ListaEspacios::MostrarEspaciosGeneral(Nodo * x) {
+	if (x != NULL) {
+		MostrarEspaciosGeneral(x->GetSig());
+		x->GetEspacio().MostrarEspacio(x->GetEspacio());
+		cout << "\n-------------------\n";
 	}
 }

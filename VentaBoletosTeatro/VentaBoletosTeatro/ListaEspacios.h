@@ -20,10 +20,11 @@ public:
 	void SetMontoTotal(float);
 	float GetMontoTotal(void);
 	void ReservarEspacioVIP(Espacio); //insertar ordenado
-	void ReservarGradGeneral(Espacio);// insertar al inicio
+	int ReservarGradGeneral(Espacio);// insertar al inicio
 	bool PagarEspacioReservado(int);
 	void LiberarReservas(void);
 	bool EsDisponible(int);
-	void MostrarEspaciosLista();
+	void MostrarEspaciosVIP();
+	void MostrarEspaciosGeneral(Nodo *);
 };
 #endif // !LISTAESPACIOS_H

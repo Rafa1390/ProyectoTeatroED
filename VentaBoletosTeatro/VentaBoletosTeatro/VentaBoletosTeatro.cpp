@@ -106,7 +106,7 @@ void reservarVIP() {
 	string nombre;
 
 	cout << "\n---VIP---" << endl;
-	if (ListaVIP->GetLong() < 10) {
+	if (ListaVIP->GetLong() <= 10) {
 		do {
 			cout << "\nDigite el numero del espacio que desea reservar" << endl;
 			cin >> numEsp;
@@ -195,14 +195,16 @@ void reservarPreferencial() {
 
 void reservarGeneral() {
 	string nombre;
+	int num;
 
 	cout << "\n---General---" << endl;
 	if (ListaGeneral->GetLong() <= 50) {
 		cout << "\nDigite el nombre de quien realiza la reserva" << endl;
 		cin >> nombre;
 		Espacio espacio(contGeneral, "Reservado", "General", 4000, nombre);
-		ListaVIP->ReservarEspacioVIP(espacio);
+		num = ListaGeneral->ReservarGradGeneral(espacio);
 		contGeneral++;
+		cout << "\n" << nombre << " ha reservado en el espacio n" << num << "\n" << endl;
 	}
 	else {
 		cout << "\nYa no hay espacios en la zona General" << endl;
@@ -237,7 +239,7 @@ void pagarReservacion() {
 
 void pagarVIP() {
 	int num;
-	bool disp = true;
+	bool disp = true, pago = false;
 
 	do {
 		cout << "\nDigite el numero del espacio en el que hizo la reservacion" << endl;
@@ -245,7 +247,13 @@ void pagarVIP() {
 		if (num >= 1 || num <= 10) {
 			disp = ListaVIP->EsDisponible(num);
 			if (disp == false) {
-				ListaVIP->PagarEspacioReservado(num);
+				pago = ListaVIP->PagarEspacioReservado(num);
+				if (pago != false) {
+					cout << "\nPago realizado" << endl;
+				}
+				else {
+					cout << "\nEl pago no pudo efectuarse" << endl;
+				}
 			}
 			else {
 				cout << "\nEl numero del espacio ingresado no se encuentra en reserva" << endl;
@@ -260,7 +268,7 @@ void pagarVIP() {
 
 void pagarGeneral() {
 	int num;
-	bool disp = true;
+	bool disp = true, pago = false;
 
 	do {
 		cout << "\nDigite el numero del espacio en el que hizo la reservacion" << endl;
@@ -268,7 +276,13 @@ void pagarGeneral() {
 		if (num >= 1 || num <= 50) {
 			disp = ListaGeneral->EsDisponible(num);
 			if (disp == false) {
-				ListaGeneral->PagarEspacioReservado(num);
+				pago = ListaGeneral->PagarEspacioReservado(num);
+				if (pago != false) {
+					cout << "\nPago realizado" << endl;
+				}
+				else {
+					cout << "\nEl pago no pudo efectuarse" << endl;
+				}
 			}
 			else {
 				cout << "\nEl numero del espacio ingresado no se encuentra en reserva" << endl;
@@ -291,10 +305,10 @@ void liberarReservas() {
 void mostrarEspacios() {
 	cout << "\n----Zona VIP----" << endl;
 	cout << "******************" << endl;
-	ListaVIP->MostrarEspaciosLista();
+	ListaVIP->MostrarEspaciosVIP();
 	cout << "******************" << endl;
 	cout << "\n----Zona General----" << endl;
 	cout << "******************" << endl;
-	ListaGeneral->MostrarEspaciosLista();
+	ListaGeneral->MostrarEspaciosGeneral(ListaGeneral->GetCabeza());
 	cout << "******************" << endl;
 }
