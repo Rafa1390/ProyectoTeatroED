@@ -125,3 +125,17 @@ bool ListaEspacios::EsDisponible(int num) {
 
 	return disp;
 }
+
+void ListaEspacios::MostrarEspaciosLista() {
+	Nodo * aux = GetCabeza();
+	Espacio info;
+
+	while (aux != NULL) {
+		info = aux->GetEspacio();
+
+		info.MostrarEspacio(info);
+		cout << "\n-------------------\n";
+
+		aux = aux->GetSig();
+	}
+}

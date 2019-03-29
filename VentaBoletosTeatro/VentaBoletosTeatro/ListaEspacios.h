@@ -24,5 +24,6 @@ public:
 	bool PagarEspacioReservado(int);
 	void LiberarReservas(void);
 	bool EsDisponible(int);
+	void MostrarEspaciosLista();
 };
 #endif // !LISTAESPACIOS_H
