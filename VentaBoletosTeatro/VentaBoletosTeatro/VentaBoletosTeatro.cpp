@@ -13,6 +13,9 @@ void reservarEspacio();
 void reservarVIP();
 void reservarPreferencial();
 void reservarGeneral();
+void pagarReservacion();
+void pagarVIP();
+void pagarGeneral();
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
@@ -43,6 +46,7 @@ int main()
 			reservarEspacio();
 			break;
 		case 2:
+			pagarReservacion();
 			break;
 		case 3:
 			break;
@@ -114,7 +118,7 @@ void reservarVIP() {
 				cout << "Por favor ingrese un numero del 1 al 10." << endl;
 			}
 			
-		} while (disp == false || numEsp < 0 || numEsp > 10);
+		} while (disp == false || numEsp < 1 || numEsp > 10);
 	}
 	else {
 		cout << "\nYa no hay espacios en la zona VIP" << endl;
@@ -125,7 +129,6 @@ void reservarVIP() {
 void reservarPreferencial() {
 
 }
-
 
 void reservarGeneral() {
 	string nombre;
@@ -141,4 +144,57 @@ void reservarGeneral() {
 	else {
 		cout << "\nYa no hay espacios en la zona General" << endl;
 	}
+}
+
+void pagarReservacion() {
+	int opc;
+	cout << "\nSeleccione la zona en la que se realizó la reservación\npara efectuar el pago" << endl;
+	cout << "1. VIP" << endl;
+	cout << "2. Preferencial" << endl;
+	cout << "3. General" << endl;
+	cin >> opc;
+	do {
+		switch (opc)
+		{
+		case 1:
+			pagarVIP();
+			break;
+		case 2:
+			//Pagar preferencial
+			break;
+		case 3:
+			pagarGeneral();
+			break;
+		default:
+			cout << "\nOpcion incorrecta" << endl;
+			break;
+		}
+	} while (opc < 1 || opc > 3);
+}
+
+void pagarVIP() {
+	int num;
+	bool disp = true;
+
+	do {
+		cout << "\nDigite el numero del espacio en el que hizo la reservacion" << endl;
+		cin >> num;
+		if (num >= 1 || num <= 10) {
+			disp = ListaVIP->EsDisponible(num);
+			if (disp == false) {
+				ListaVIP->PagarEspacioReservado(num);
+			}
+			else {
+				cout << "\nEl numero del espacio ingresado no se encuentra en reserva" << endl;
+			}
+		}
+		else {
+			cout << "\nEl numero que ingreso es incorrecto" << endl;
+			cout << "Por favor ingrese un numero del 1 al 10" << endl;
+		}
+	} while (num < 1 || num > 10 || disp == true);
+}
+
+void pagarGeneral() {
+
 }
