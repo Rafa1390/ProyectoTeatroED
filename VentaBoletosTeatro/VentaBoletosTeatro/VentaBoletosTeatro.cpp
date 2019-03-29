@@ -15,6 +15,11 @@ void reservarEspacio();
 void reservarVIP();
 void reservarPreferencial();
 void reservarGeneral();
+void reservarGraderia1(Espacio *temp, int fila, string nombre);
+void reservarGraderia2(Espacio *temp, int fila, string nombre);
+void pagarPreferencial();
+void pagarGraderia1(int fila, string nombre);
+void pagarGraderia2(int fila, string nombre);
 void pagarReservacion();
 void pagarVIP();
 void pagarGeneral();
@@ -35,8 +40,22 @@ Pila *graderia2_2 = new Pila();
 Pila *graderia2_3 = new Pila();
 Pila *graderia2_4 = new Pila();
 Pila *graderia2_5 = new Pila();
+<<<<<<< HEAD
 Cola *colaClientes = new Cola();
 
+=======
+
+Pila *graderia1_1Pagado = new Pila();
+Pila *graderia1_2Pagado = new Pila();
+Pila *graderia1_3Pagado = new Pila();
+Pila *graderia1_4Pagado = new Pila();
+Pila *graderia1_5Pagado = new Pila();
+Pila *graderia2_1Pagado = new Pila();
+Pila *graderia2_2Pagado = new Pila();
+Pila *graderia2_3Pagado = new Pila();
+Pila *graderia2_4Pagado = new Pila();
+Pila *graderia2_5Pagado = new Pila();
+>>>>>>> 9f9a08316bbdfbfa92964bc7128635fe37fc6511
 int contGeneral = 1;
 bool reservasLib = false;
 
@@ -170,12 +189,13 @@ void reservarPreferencial() {
 	switch (lector) {
 
 	case 1:
-		cout << "\nGraderia preferencial 1" << endl << endl << 
-			"Ingrese la fila en la que desea reservar: 1,2,3,4 o 5." << endl;
 		try {
+			cout << "\nGraderia preferencial 1" << endl << endl <<
+				"Ingrese la fila en la que desea reservar: 1,2,3,4 o 5." << endl;
+			cin >> fila;
 			cout << "Ingrese su nombre:" << endl;
 			cin >> nombre;
-			cin >> fila;
+			
 			Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
 			reservarGraderia1(temp, fila, nombre);
 
@@ -186,14 +206,15 @@ void reservarPreferencial() {
 		break;
 
 	case 2:
-		cout << "\nGraderia preferencial 2" << endl << endl <<
-			"Ingrese la fila en la que desea reservar: 1,2,3,4 o 5." << endl;
 		try {
+			cout << "\nGraderia preferencial 2" << endl << endl <<
+				"Ingrese la fila en la que desea reservar: 1,2,3,4 o 5." << endl;
+			cin >> fila;
 			cout << "Ingrese su nombre:" << endl;
 			cin >> nombre;
-			cin >> fila;
+			
 			Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
-			reservarGraderia1(temp, fila, nombre);
+			reservarGraderia2(temp, fila, nombre);
 		}
 		catch (exception e) {
 			cout << "Ha ocurrido un error, por favor intentelo de nuevo.";
@@ -260,6 +281,7 @@ void reservarGraderia1(Espacio *temp, int fila, string nombre) {
 		}
 		break;
 	default:
+		cout << "Esta fila no existe." << endl;
 		break;
 	}
 }
@@ -319,6 +341,7 @@ void reservarGraderia2(Espacio *temp, int fila, string nombre) {
 		}
 		break;
 	default:
+		cout << "Esta fila no existe." << endl;
 		break;
 	}
 }
@@ -341,6 +364,7 @@ void reservarGeneral() {
 	}
 }
 
+
 void pagarReservacion() {
 	int opc;
 	cout << "\nSeleccione la zona en la que se realizó la reservación\npara efectuar el pago" << endl;
@@ -355,7 +379,7 @@ void pagarReservacion() {
 			pagarVIP();
 			break;
 		case 2:
-			//Pagar preferencial
+			pagarPreferencial();
 			break;
 		case 3:
 			pagarGeneral();
@@ -394,6 +418,93 @@ void pagarVIP() {
 			cout << "Por favor ingrese un numero del 1 al 10" << endl;
 		}
 	} while (num < 1 || num > 10 || disp == true);
+}
+
+void pagarPreferencial() {
+
+	int fila = 0;
+	int graderia = 0;
+	string nombre;
+
+	cout << "" << endl <<
+		"Ingrese su nombre:" << endl;
+	cin >> nombre;
+	cout << "" << endl <<
+		"Ingrese la fila en la que reservo:" << endl;
+	cin >> fila;
+
+	try {
+		if (graderia == 1) {
+			pagarGraderia1(fila, nombre);
+		}
+		else if (graderia == 2) {
+			pagarGraderia2(fila, nombre);
+		}
+	}
+	catch (exception e) {
+		cout << "ha sucedido un error, por favor intentelo de nuevo." << endl;
+	}
+
+}
+
+void pagarGraderia1(int fila, string nombre) {
+	
+	switch (fila) {
+
+	case 1:
+		graderia1_1Pagado->insertarElem(graderia1_1->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	case 2:
+		graderia1_2Pagado->insertarElem(graderia1_2->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	case 3:
+		graderia1_3Pagado->insertarElem(graderia1_3->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	case 4:
+		graderia1_4Pagado->insertarElem(graderia1_4->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	case 5:
+		graderia1_5Pagado->insertarElem(graderia1_5->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	default:
+		cout << "Opcion invalida." << endl;
+		break;
+	}
+}
+
+void pagarGraderia2(int fila, string nombre) {
+	
+	switch (fila) {
+
+	case 1:
+		graderia2_1Pagado->insertarElem(graderia2_1->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	case 2:
+		graderia2_2Pagado->insertarElem(graderia2_2->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	case 3:
+		graderia2_3Pagado->insertarElem(graderia2_3->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	case 4:
+		graderia2_4Pagado->insertarElem(graderia2_4->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	case 5:
+		graderia2_5Pagado->insertarElem(graderia2_5->RetirarElemTope());
+		cout << "Pago realizado" << endl;
+		break;
+	default:
+		cout << "Opcion invalida." << endl;
+		break;
+	}
 }
 
 void pagarGeneral() {
