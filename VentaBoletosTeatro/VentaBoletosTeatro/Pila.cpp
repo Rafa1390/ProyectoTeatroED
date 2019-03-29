@@ -35,9 +35,9 @@ void Pila::mostrarPila() {
 	if (getCabeza() != NULL) {
 		cout << endl << "Elementos de la pila: " << endl << endl;
 		while (actual != NULL) {
-			std::cout << actual->GetEspacio().GetEstado << ", " << actual->GetEspacio().GetEstado << ", " 
-				<< actual->GetEspacio().GetNombre << ", " << actual->GetEspacio().GetTipo << ", " 
-				<< actual->GetEspacio().GetCosto << ", " << actual->GetEspacio().GetNumEspacio << ", " << endl;
+			std::cout << actual->GetEspacio().GetEstado() << ", " << actual->GetEspacio().GetEstado() << ", " 
+				<< actual->GetEspacio().GetNombre() << ", " << actual->GetEspacio().GetTipo() << ", " 
+				<< actual->GetEspacio().GetCosto() << ", " << actual->GetEspacio().GetNumEspacio() << ", " << endl;
 			actual = actual->GetSig();
 		}
 		std::cout << endl;
