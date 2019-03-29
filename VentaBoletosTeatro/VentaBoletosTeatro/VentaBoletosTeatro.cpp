@@ -347,7 +347,7 @@ void pagarReservacion() {
 			pagarVIP();
 			break;
 		case 2:
-			//Pagar preferencial
+			pagarPreferencial();
 			break;
 		case 3:
 			pagarGeneral();
@@ -386,6 +386,68 @@ void pagarVIP() {
 			cout << "Por favor ingrese un numero del 1 al 10" << endl;
 		}
 	} while (num < 1 || num > 10 || disp == true);
+}
+
+void pagarPreferencial() {
+
+	int fila = 0;
+	int graderia = 0;
+	string nombre;
+
+	cout << "" << endl <<
+		"Ingrese su nombre:" << endl;
+	cin >> nombre;
+
+	try {
+		if (graderia == 1) {
+			pagarGraderia1(fila, nombre);
+		}
+		else if (graderia == 2) {
+			pagarGraderia2(fila, nombre);
+		}
+	}
+	catch (exception e) {
+		cout << "ha sucedido un error, por favor intentelo de nuevo." << endl;
+	}
+
+}
+
+void pagarGraderia1(int fila, string nombre) {
+	switch (fila) {
+
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	default:
+		cout << "Opcion invalida." << endl;
+		break;
+	}
+}
+
+void pagarGraderia2(int fila, string nombre) {
+	switch (fila) {
+
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	default:
+		cout << "Opcion invalida." << endl;
+		break;
+	}
 }
 
 void pagarGeneral() {
