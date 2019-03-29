@@ -19,6 +19,7 @@ void pagarVIP();
 void pagarGeneral();
 void liberarReservas();
 void mostrarEspacios();
+void iniciarFuncion();
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
@@ -65,6 +66,7 @@ int main()
 			liberarReservas();
 			break;
 		case 4:
+			iniciarFuncion();
 			break;
 		case 5:
 			mostrarEspacios();
@@ -169,7 +171,7 @@ void reservarPreferencial() {
 			cin >> nombre;
 			cin >> fila;
 			Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
-			reservarGraderia1(temp, fila, nombre);
+			//reservarGraderia1(temp, fila, nombre);
 
 		}
 		catch (exception e) {
@@ -185,7 +187,7 @@ void reservarPreferencial() {
 			cin >> nombre;
 			cin >> fila;
 			Espacio *temp = new Espacio(contGeneral, "Reservado", "Preferencial", 5500, nombre);
-			reservarGraderia1(temp, fila, nombre);
+			//reservarGraderia1(temp, fila, nombre);
 		}
 		catch (exception e) {
 			cout << "Ha ocurrido un error, por favor intentelo de nuevo.";
@@ -433,4 +435,18 @@ void mostrarEspacios() {
 	cout << "******************" << endl;
 	ListaGeneral->MostrarEspaciosGeneral(ListaGeneral->GetCabeza());
 	cout << "******************" << endl;
+}
+
+void iniciarFuncion() {
+	cout << "\n----Zona VIP----" << endl;
+	cout << "\nCantidad de personas en la funcion: " << ListaVIP->GetPagados() << endl;
+	cout << "Monto total vendido en la zona: " << ListaVIP->GetMontoTotal() << " colones" << endl;
+
+	//cout << "\n----Zona Graderia Preferencial----" << endl;
+
+	cout << "\n----Zona Graderia General----" << endl;
+	cout << "\nCantidad de personas en la funcion: " << ListaGeneral->GetPagados() << endl;
+	cout << "Monto total vendido en la zona: " << ListaGeneral->GetMontoTotal() << " colones" << endl;
+
+	cout << "\n----Monto total recaudado en la funcion: " << ListaVIP->GetMontoTotal() + ListaGeneral->GetMontoTotal()/*+ preferencial*/ << " colones----" << endl;
 }
