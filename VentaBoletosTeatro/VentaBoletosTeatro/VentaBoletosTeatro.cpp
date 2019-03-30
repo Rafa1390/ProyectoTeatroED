@@ -25,6 +25,7 @@ void pagarReservacion();
 void pagarVIP();
 void pagarGeneral();
 void liberarReservas();
+void liberarReservasPreferencial();
 void mostrarEspacios();
 void iniciarFuncion();
 void enviarACola();
@@ -578,16 +579,57 @@ void pagarGeneral() {
 }
 
 void liberarReservas() {
-	if (ListaVIP->GetCabeza() != NULL && ListaGeneral->GetCabeza() != NULL /*preferencial*/) {
+	if (ListaVIP->GetCabeza() != NULL) {
 		ListaVIP->LiberarReservas();
-		//Liberar reservas preferencial
-		ListaGeneral->LiberarReservas();
+		
 		reservasLib = true;
-		cout << "\nReservas liberadas" << endl;
+		cout << "\nAsientos reservados en VIP han sido liberadas." << endl;
 	}
 	else {
-		cout << "\nAun no se han realizado reservaciones" << endl;
+		cout << "\nNo se han realizado reservaciones VIP." << endl;
 	}
+
+	if (graderia1_1->getLongitud() == 0 &&
+		graderia1_2->getLongitud() == 0 &&
+		graderia1_3->getLongitud() == 0 &&
+		graderia1_4->getLongitud() == 0 &&
+		graderia1_5->getLongitud() == 0 &&
+		graderia2_1->getLongitud() == 0 &&
+		graderia2_2->getLongitud() == 0 &&
+		graderia2_3->getLongitud() == 0 &&
+		graderia2_4->getLongitud() == 0 &&
+		graderia2_5->getLongitud() == 0) {
+
+		cout << "\nNo se han realizado reservaciones preferenciales" << endl;
+	}
+	else {
+		liberarReservasPreferencial();
+	}
+
+	if (ListaGeneral->GetCabeza() != NULL) {
+		ListaGeneral->LiberarReservas();
+		cout << "\nAsientos reservados en asientos regulares han sido liberadas." << endl;
+	}
+	else {
+		cout << "\nNo se han realizado reservaciones en asientos regulares." << endl;
+	}
+
+}
+
+void liberarReservasPreferencial() {
+
+	graderia1_1->liberarReservas();
+	graderia1_2->liberarReservas();
+	graderia1_3->liberarReservas();
+	graderia1_4->liberarReservas();
+	graderia1_5->liberarReservas();
+	graderia2_1->liberarReservas();
+	graderia2_2->liberarReservas();
+	graderia2_3->liberarReservas();
+	graderia2_4->liberarReservas();
+	graderia2_5->liberarReservas();
+
+	cout << "\nAsientos reservados en graderias preferenciales han sido liberadas." << endl;
 }
 
 void mostrarEspacios() {

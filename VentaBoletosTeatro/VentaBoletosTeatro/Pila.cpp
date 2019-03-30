@@ -46,6 +46,13 @@ void Pila::mostrarPila() {
 	}
 }
 
+void Pila::liberarReservas()
+{
+	while (this->getLongitud() != 0) {
+		this->RetirarElemTope();
+	}
+}
+
 Espacio Pila::RetirarElemTope() {
 	Espacio *valor = new Espacio();
 	if (getCabeza() != NULL) {
