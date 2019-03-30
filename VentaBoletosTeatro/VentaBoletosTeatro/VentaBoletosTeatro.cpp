@@ -20,10 +20,12 @@ void reservarGraderia2(Espacio *temp, int fila, string nombre);
 void pagarPreferencial();
 void pagarGraderia1(int fila, string nombre);
 void pagarGraderia2(int fila, string nombre);
+void realizarPagoGraderiaEnFila(Pila *graderia, Pila *graderiaPagado, string nombre);
 void pagarReservacion();
 void pagarVIP();
 void pagarGeneral();
 void liberarReservas();
+void liberarReservasPreferencial();
 void mostrarEspacios();
 void iniciarFuncion();
 void enviarACola();
@@ -98,6 +100,7 @@ int main()
 			break;
 		case 6:
 			atenderClienteCola();
+			graderia1_1Pagado->mostrarPila();
 			break;
 		case 7:
 			break;
@@ -435,6 +438,9 @@ void pagarPreferencial() {
 		"Ingrese su nombre:" << endl;
 	cin >> nombre;
 	cout << "" << endl <<
+		"Ingrese la graderia:" << endl;
+	cin >> graderia;
+	cout << "" << endl <<
 		"Ingrese la fila en la que reservo:" << endl;
 	cin >> fila;
 
@@ -453,27 +459,27 @@ void pagarPreferencial() {
 }
 
 void pagarGraderia1(int fila, string nombre) {
-	
+
 	switch (fila) {
 
 	case 1:
-		graderia1_1Pagado->insertarElem(graderia1_1->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia1_1, graderia1_1Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	case 2:
-		graderia1_2Pagado->insertarElem(graderia1_2->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia1_2, graderia1_2Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	case 3:
-		graderia1_3Pagado->insertarElem(graderia1_3->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia1_3, graderia1_3Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	case 4:
-		graderia1_4Pagado->insertarElem(graderia1_4->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia1_4, graderia1_4Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	case 5:
-		graderia1_5Pagado->insertarElem(graderia1_5->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia1_5, graderia1_5Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	default:
@@ -512,6 +518,45 @@ void pagarGraderia2(int fila, string nombre) {
 	}
 }
 
+void realizarPagoGraderiaEnFila(Pila *graderia,Pila *graderiaPagado, string nombre) {
+	int breaker = 0;
+	int contador = 0;
+	Espacio temp;
+	Pila *pilaTemp = new Pila();
+
+	while (breaker == 0) {
+		temp = graderia->RetirarElemTope();
+
+		if (nombre == temp.GetNombre()) {
+			temp.SetEstado("Pagado");
+			graderiaPagado->insertarElem(temp);
+			breaker = 1;
+		}
+		else {
+			pilaTemp->insertarElem(temp);
+			
+		}
+
+		if (contador >= graderia->getLongitud()) {
+			breaker = 1;
+		}
+		contador++;
+	}
+
+	breaker = 0;
+	while (breaker == 0) {
+		temp = pilaTemp->RetirarElemTope();
+		graderia->insertarElem(temp);
+		contador = pilaTemp->getLongitud();
+		if (pilaTemp->getLongitud()==0) {
+			breaker = 1;
+		}
+
+	}
+	
+
+}
+
 void pagarGeneral() {
 	int num;
 	bool disp = true, pago = false;
@@ -542,16 +587,57 @@ void pagarGeneral() {
 }
 
 void liberarReservas() {
-	if (ListaVIP->GetCabeza() != NULL && ListaGeneral->GetCabeza() != NULL /*preferencial*/) {
+	if (ListaVIP->GetCabeza() != NULL) {
 		ListaVIP->LiberarReservas();
-		//Liberar reservas preferencial
-		ListaGeneral->LiberarReservas();
+		
 		reservasLib = true;
-		cout << "\nReservas liberadas" << endl;
+		cout << "\nAsientos reservados en VIP han sido liberadas." << endl;
 	}
 	else {
-		cout << "\nAun no se han realizado reservaciones" << endl;
+		cout << "\nNo se han realizado reservaciones VIP." << endl;
 	}
+
+	if (graderia1_1->getLongitud() == 0 &&
+		graderia1_2->getLongitud() == 0 &&
+		graderia1_3->getLongitud() == 0 &&
+		graderia1_4->getLongitud() == 0 &&
+		graderia1_5->getLongitud() == 0 &&
+		graderia2_1->getLongitud() == 0 &&
+		graderia2_2->getLongitud() == 0 &&
+		graderia2_3->getLongitud() == 0 &&
+		graderia2_4->getLongitud() == 0 &&
+		graderia2_5->getLongitud() == 0) {
+
+		cout << "\nNo se han realizado reservaciones preferenciales" << endl;
+	}
+	else {
+		liberarReservasPreferencial();
+	}
+
+	if (ListaGeneral->GetCabeza() != NULL) {
+		ListaGeneral->LiberarReservas();
+		cout << "\nAsientos reservados en asientos regulares han sido liberadas." << endl;
+	}
+	else {
+		cout << "\nNo se han realizado reservaciones en asientos regulares." << endl;
+	}
+
+}
+
+void liberarReservasPreferencial() {
+
+	graderia1_1->liberarReservas();
+	graderia1_2->liberarReservas();
+	graderia1_3->liberarReservas();
+	graderia1_4->liberarReservas();
+	graderia1_5->liberarReservas();
+	graderia2_1->liberarReservas();
+	graderia2_2->liberarReservas();
+	graderia2_3->liberarReservas();
+	graderia2_4->liberarReservas();
+	graderia2_5->liberarReservas();
+
+	cout << "\nAsientos reservados en graderias preferenciales han sido liberadas." << endl;
 }
 
 void mostrarEspacios() {

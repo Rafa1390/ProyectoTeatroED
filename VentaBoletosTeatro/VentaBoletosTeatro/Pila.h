@@ -17,6 +17,7 @@ public:
 	Espacio topePila();
 	bool esVaciaPila();
 	void mostrarPila();
+	void liberarReservas();
 
 private:
 	Nodo * cabeza;

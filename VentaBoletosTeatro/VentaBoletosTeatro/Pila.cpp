@@ -25,7 +25,6 @@ void Pila::insertarElem(Espacio x) {
 
 	aux->SetSig(getCabeza());
 	setCabeza(aux);
-	cout << endl << "Espacio reservado exitosamente." << endl << endl;
 	sumarLongitud();
 }
 
@@ -35,9 +34,9 @@ void Pila::mostrarPila() {
 	if (getCabeza() != NULL) {
 		cout << endl << "Elementos de la pila: " << endl << endl;
 		while (actual != NULL) {
-			std::cout << actual->GetEspacio().GetEstado() << ", " << actual->GetEspacio().GetEstado() << ", " 
-				<< actual->GetEspacio().GetNombre() << ", " << actual->GetEspacio().GetTipo() << ", " 
-				<< actual->GetEspacio().GetCosto() << ", " << actual->GetEspacio().GetNumEspacio() << ", " << endl;
+			std::cout << actual->GetEspacio().GetEstado() << ", " << actual->GetEspacio().GetNombre() << 
+				", " << actual->GetEspacio().GetTipo() << ", " << actual->GetEspacio().GetCosto() <<
+				", " << actual->GetEspacio().GetNumEspacio() << ", " << endl;
 			actual = actual->GetSig();
 		}
 		std::cout << endl;
@@ -47,12 +46,23 @@ void Pila::mostrarPila() {
 	}
 }
 
+void Pila::liberarReservas()
+{
+	while (this->getLongitud() != 0) {
+		this->RetirarElemTope();
+	}
+}
+
 Espacio Pila::RetirarElemTope() {
 	Espacio *valor = new Espacio();
 	if (getCabeza() != NULL) {
 		Nodo * aux;
 		aux = getCabeza();
 		valor = &aux->GetEspacio();
+		valor->SetCosto(aux->GetEspacio().GetCosto());
+		valor->SetEstado(aux->GetEspacio().GetEstado());
+		valor->SetNombre(aux->GetEspacio().GetNombre());
+		valor->SetTipo(aux->GetEspacio().GetTipo());
 		setCabeza(getCabeza()->GetSig());
 		restarLongitud();
 	}
