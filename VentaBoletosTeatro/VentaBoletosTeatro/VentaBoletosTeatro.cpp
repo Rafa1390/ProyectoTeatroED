@@ -35,6 +35,8 @@ void atenderClienteCola();
 void ingresarVIP(string);
 void ingresarGeneral(string);
 void ingresarPreferencialDesdeCola(string);
+void ingresarGraderia1PagoDesdeCola(string nombre, int fila);
+void ingresarGraderia2PagoDesdeCola(string nombre, int fila);
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
@@ -103,9 +105,9 @@ int main()
 			break;
 		case 6:
 			atenderClienteCola();
-			graderia1_1Pagado->mostrarPila();
 			break;
 		case 7:
+			graderia1_2Pagado->mostrarPila();
 			break;
 		case 8:
 			break;
@@ -625,10 +627,12 @@ void liberarReservas() {
 	}
 	else {
 		liberarReservasPreferencial();
+		reservasLib = true;
 	}
 
 	if (ListaGeneral->GetCabeza() != NULL) {
 		ListaGeneral->LiberarReservas();
+		reservasLib = true;
 		cout << "\nAsientos reservados en asientos regulares han sido liberadas." << endl;
 	}
 	else {
@@ -803,6 +807,143 @@ void ingresarGeneral(string nombre) {
 
 void ingresarPreferencialDesdeCola(string nombre) {
 
+	int graderia = 0;
+	int fila = 0;
+
+	cout << "Ingrese la graderia:" << endl << "1. Graderia derecha." << "2. Graderia izquierda.";
+	cin >> graderia;
+	cout << "Ingrese la fila: 1,2,3,4 o 5." << endl;
+	cin >> fila;
+
+	if (graderia == 1) {
+		if (fila == 1 || fila == 2 || fila == 3 || fila == 4|| fila == 5) {
+			ingresarGraderia1PagoDesdeCola(nombre, fila);
+		}
+		else {
+			cout << "Fila no valida." << endl;
+		}
+	}
+	else if (graderia == 2) {
+		if (fila == 1 || fila == 2 || fila == 3 || fila == 4 || fila == 5) {
+			ingresarGraderia2PagoDesdeCola(nombre, fila);
+		}
+		else {
+			cout << "Fila no valida." << endl;
+		}
+	}
+	else {
+		cout << "Graderia no valida." << endl;
+	}
+
+}
+
+void ingresarGraderia1PagoDesdeCola(string nombre, int fila) {
+	Espacio espacioTemp;
+	espacioTemp.SetEstado("Pagado");
+	espacioTemp.SetCosto(5500);
+	espacioTemp.SetNombre(nombre);
+	espacioTemp.SetTipo("Preferencial");
+	switch (fila) {
+	case 1:
+		if (graderia1_1Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia1_1Pagado->getLongitud() + 1);
+			graderia1_1Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	case 2:
+		if (graderia1_2Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia1_2Pagado->getLongitud() + 1);
+			graderia1_2Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	case 3:
+		if (graderia1_3Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia1_3Pagado->getLongitud() + 1);
+			graderia1_3Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	case 4:
+		if (graderia1_4Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia1_4Pagado->getLongitud() + 1);
+			graderia1_4Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	case 5:
+		if (graderia1_5Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia1_5Pagado->getLongitud() + 1);
+			graderia1_5Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	}
+}
 
 
+void ingresarGraderia2PagoDesdeCola(string nombre, int fila) {
+	Espacio espacioTemp;
+	espacioTemp.SetEstado("Pagado");
+	espacioTemp.SetCosto(5500);
+	espacioTemp.SetNombre(nombre);
+	espacioTemp.SetTipo("Preferencial");
+	switch (fila) {
+	case 1:
+		if (graderia2_1Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia2_1Pagado->getLongitud() + 1);
+			graderia2_1Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	case 2:
+		if (graderia2_2Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia2_2Pagado->getLongitud() + 1);
+			graderia2_2Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	case 3:
+		if (graderia2_3Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia2_3Pagado->getLongitud() + 1);
+			graderia2_3Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	case 4:
+		if (graderia2_4Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia2_4Pagado->getLongitud() + 1);
+			graderia2_4Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	case 5:
+		if (graderia2_5Pagado->getLongitud() == 5) {
+			cout << "Esta fila esta llena." << endl;
+		}
+		else {
+			espacioTemp.SetNumEspacio(graderia2_5Pagado->getLongitud() + 1);
+			graderia2_5Pagado->insertarElem(espacioTemp);
+		}
+		break;
+	}
 }
