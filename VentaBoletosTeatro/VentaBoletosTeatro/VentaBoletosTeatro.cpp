@@ -681,7 +681,7 @@ void iniciarFuncion() {
 	cout << "\nCantidad de personas en la funcion: " << ListaGeneral->GetPagados() << endl;
 	cout << "Monto total vendido en la zona: " << ListaGeneral->GetMontoTotal() << " colones" << endl;
 
-	cout << "\n----Monto total recaudado en la funcion: " << ListaVIP->GetMontoTotal() + ListaGeneral->GetMontoTotal()/*+ preferencial*/ << " colones----" << endl;
+	cout << "\n----Monto total recaudado en la funcion: " << ListaVIP->GetMontoTotal() + ListaGeneral->GetMontoTotal() + MontoTotalPreferencial() << " colones----" << endl;
 }
 
 int conseguirTotalEspaciosPreferencialesPagos()
