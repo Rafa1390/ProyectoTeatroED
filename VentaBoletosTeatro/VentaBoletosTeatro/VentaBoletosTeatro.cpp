@@ -28,6 +28,8 @@ void liberarReservas();
 void liberarReservasPreferencial();
 void mostrarEspacios();
 void iniciarFuncion();
+int conseguirTotalEspaciosPreferencialesPagos();
+double MontoTotalPreferencial();
 void enviarACola();
 void atenderClienteCola();
 void ingresarVIP(string);
@@ -656,13 +658,37 @@ void iniciarFuncion() {
 	cout << "\nCantidad de personas en la funcion: " << ListaVIP->GetPagados() << endl;
 	cout << "Monto total vendido en la zona: " << ListaVIP->GetMontoTotal() << " colones" << endl;
 
-	//cout << "\n----Zona Graderia Preferencial----" << endl;
+	cout << "\n----Zona Graderia Preferencial----" << endl;
+	cout << "\nCantidad de personas en la funcion: " << conseguirTotalEspaciosPreferencialesPagos() << endl;
+	cout << "Monto total vendido en la zona: " << MontoTotalPreferencial() << " colones" << endl;
 
 	cout << "\n----Zona Graderia General----" << endl;
 	cout << "\nCantidad de personas en la funcion: " << ListaGeneral->GetPagados() << endl;
 	cout << "Monto total vendido en la zona: " << ListaGeneral->GetMontoTotal() << " colones" << endl;
 
 	cout << "\n----Monto total recaudado en la funcion: " << ListaVIP->GetMontoTotal() + ListaGeneral->GetMontoTotal()/*+ preferencial*/ << " colones----" << endl;
+}
+
+int conseguirTotalEspaciosPreferencialesPagos()
+{
+	int totalEspaciosPagos = 0;
+	totalEspaciosPagos = totalEspaciosPagos+ graderia1_1Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia1_2Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia1_3Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia1_4Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia1_5Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia2_1Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia2_2Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia2_3Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia2_4Pagado->getLongitud();
+	totalEspaciosPagos = totalEspaciosPagos + graderia2_5Pagado->getLongitud();
+	return totalEspaciosPagos;
+}
+
+double MontoTotalPreferencial()
+{
+	double total = conseguirTotalEspaciosPreferencialesPagos() * 5500;
+	return total;
 }
 
 void enviarACola() {
