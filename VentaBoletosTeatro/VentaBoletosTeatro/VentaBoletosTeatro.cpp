@@ -27,6 +27,9 @@ void liberarReservas();
 void mostrarEspacios();
 void iniciarFuncion();
 void enviarACola();
+void atenderClienteCola();
+void ingresarVIP(string);
+void ingresarGeneral(string);
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
@@ -69,9 +72,10 @@ int main()
 			<< "3. Liberar reservaciones." << endl
 			<< "4. Iniciar la Funcion." << endl
 			<< "5. Mostrar espacios" << endl
-			<< "6. Mostrar teatro./Extra" << endl
-			<< "7. Mostrar teatro(modo grafico)./extra" << endl
-			<< "8. Salir." << endl << endl
+			<< "6. Atender clientes en cola" << endl
+			<< "7. Mostrar teatro./Extra" << endl
+			<< "8. Mostrar teatro(modo grafico)./extra" << endl
+			<< "9. Salir." << endl << endl
 			<< "============================" << endl;
 
 		std::cin >> lectura;
@@ -93,10 +97,13 @@ int main()
 			mostrarEspacios();
 			break;
 		case 6:
+			atenderClienteCola();
 			break;
 		case 7:
 			break;
 		case 8:
+			break;
+		case 9:
 			breaker = 1;
 			std::cout << "Gracias por usar nuestro servicio, lo esperamos pronto." << endl;
 			break;
@@ -358,6 +365,7 @@ void reservarGeneral() {
 	}
 	else {
 		cout << "\nYa no hay espacios en la zona General" << endl;
+		enviarACola();
 	}
 }
 
@@ -592,4 +600,81 @@ void enviarACola() {
 			cout << "Opcion incorrecta" << endl;
 		}
 	} while (resp < 1 || resp > 2);
+}
+
+void atenderClienteCola() {
+	string nombre;
+
+	if (reservasLib == true) {
+		nombre = colaClientes->atender();
+		if (nombre != "") {
+			cout << "\nSe atiende a " << nombre << endl;
+			int opc;
+			cout << "Seleccione la zona a la que desea ingresar" << endl;
+			cout << "1. VIP" << endl;
+			cout << "2. Preferencial" << endl;
+			cout << "3. General" << endl;
+			cin >> opc;
+			do {
+				switch (opc)
+				{
+				case 1:
+					ingresarVIP(nombre);
+					break;
+				case 2:
+					//ingresarPreferencial(nombre);
+					break;
+				case 3:
+					ingresarGeneral(nombre);
+					break;
+				default:
+					cout << "\nOpcion incorrecta" << endl;
+					break;
+				}
+			} while (opc < 1 || opc > 3);
+		}
+	}
+	else {
+		cout << "Aun no se liberan reserevaciones" << endl;
+	}
+}
+
+void ingresarVIP(string nombre) {
+	int num;
+	bool realizado = false;
+
+	if (ListaVIP->GetPagados() < 10) {
+		do {
+			cout << "\nDigite el numero del espacio al que desea ingresar" << endl;
+			cin >> num;
+
+			if (num > 10 || num < 1) {
+				cout << "\nPor favor ingrese un numero del 1 al 10" << endl;
+			}
+			else {
+				realizado = ListaVIP->IngresarVIP(num, nombre);
+			}
+
+			if (realizado == false) {
+				cout << "\nEl numero de espacio ingresado ya se encuentra ocupado, por favor ingrese otro" << endl;
+			}
+
+		} while (realizado == false || num > 10 || num < 1);
+	}
+	else {
+		cout << "\nLo sentimos los espacios de esta zona ya estan llenos" << endl;
+	}
+}
+
+void ingresarGeneral(string nombre) {
+	
+	bool realizado = false;
+
+	if (ListaGeneral->GetPagados() < 50) {
+		realizado = ListaGeneral->IngresarGeneral(nombre);
+		cout << "\nPago efectuado" << endl;
+	}
+	else {
+		cout << "\nLo sentimos los espacios de esta zona ya estan llenos" << endl;
+	}
 }

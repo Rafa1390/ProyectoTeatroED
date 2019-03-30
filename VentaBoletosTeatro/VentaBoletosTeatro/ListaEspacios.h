@@ -25,6 +25,8 @@ public:
 	void LiberarReservas(void);
 	bool EsDisponible(int);
 	void MostrarEspaciosVIP();
-	void MostrarEspaciosGeneral(Nodo *);
+	void MostrarEspaciosGeneral(Nodo*);
+	bool IngresarVIP(int, string);
+	bool IngresarGeneral(string);
 };
 #endif // !LISTAESPACIOS_H

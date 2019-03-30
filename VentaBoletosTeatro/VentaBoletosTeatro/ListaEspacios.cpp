@@ -156,3 +156,48 @@ void ListaEspacios::MostrarEspaciosGeneral(Nodo * x) {
 		cout << "\n-------------------\n";
 	}
 }
+
+bool ListaEspacios::IngresarVIP(int pNum, string nombre) {
+	Nodo * aux = GetCabeza();
+	Espacio info;
+	bool realizado = false;
+
+	while (aux != NULL) {
+
+		if (aux->GetEspacio().GetNumEspacio() == pNum && aux->GetEspacio().GetEstado() == "Libre") {
+			info = aux->GetEspacio();
+			info.SetEstado("Pagado");
+			info.SetNombre(nombre);
+			aux->SetEspacio(info);
+			pagados++;
+			montoTotal = montoTotal + aux->GetEspacio().GetCosto();
+			realizado = true;
+		}
+		aux = aux->GetSig();
+	}
+
+	return realizado;
+}
+
+bool ListaEspacios::IngresarGeneral(string nombre) {
+	Nodo * aux = GetCabeza();
+	Espacio info;
+	bool realizado = false;
+
+	while (aux != NULL) {
+
+		if (realizado == false && aux->GetEspacio().GetEstado() == "Libre") {
+			info = aux->GetEspacio();
+			info.SetEstado("Pagado");
+			info.SetNombre(nombre);
+			cout << "Su espacio asignado es el n" << info.GetNumEspacio() << endl;
+			aux->SetEspacio(info);
+			pagados++;
+			montoTotal = montoTotal + aux->GetEspacio().GetCosto();
+			realizado = true;
+		}
+		aux = aux->GetSig();
+	}
+
+	return realizado;
+}
