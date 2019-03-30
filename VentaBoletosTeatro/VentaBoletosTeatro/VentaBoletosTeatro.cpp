@@ -37,6 +37,12 @@ void ingresarGeneral(string);
 void ingresarPreferencialDesdeCola(string);
 void ingresarGraderia1PagoDesdeCola(string nombre, int fila);
 void ingresarGraderia2PagoDesdeCola(string nombre, int fila);
+void mostrarTeatro();
+void imprimirVIP();
+void imprimirPreferenciales();
+void imprimirFila(Pila *fila, Pila *filaPago);
+void imprimirTipoEstado(string estado);
+void imprimirRegulares();
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
@@ -107,7 +113,7 @@ int main()
 			atenderClienteCola();
 			break;
 		case 7:
-			graderia1_2Pagado->mostrarPila();
+			mostrarTeatro();
 			break;
 		case 8:
 			break;
@@ -946,4 +952,113 @@ void ingresarGraderia2PagoDesdeCola(string nombre, int fila) {
 		}
 		break;
 	}
+}
+void mostrarTeatro() {
+
+	cout << endl <<
+		   "              ============================================" << endl <<
+		   "             |                                            |" << endl <<
+		   "             |                                            |"<< endl <<
+		   "             |                  Escenario                 |" <<
+		   "             |                                            |" << endl <<
+		   "             |                                            |" << endl <<
+		   "             |                                            |" << endl << 
+		   "              ============================================" << endl << endl <<
+		   " _____________________________________________________________________________" << endl << endl;
+
+
+	imprimirVIP();
+	imprimirPreferenciales();
+	imprimirRegulares();
+	cout << endl << " _____________________________________________________________________________" << endl;
+
+}
+
+void imprimirVIP() {
+
+}
+
+void imprimirPreferenciales() {
+	
+	Pila *pilaTemp = new Pila();
+
+	cout << "              ";
+	imprimirFila(graderia1_1, graderia1_1Pagado);
+	cout << "  |  ";
+	imprimirFila(graderia2_1, graderia2_1Pagado);
+	cout << endl << "              ";
+	imprimirFila(graderia1_2, graderia1_2Pagado);
+	cout << "  |  ";
+	imprimirFila(graderia2_2, graderia2_2Pagado);
+	cout << endl << "              ";
+	imprimirFila(graderia1_3, graderia1_3Pagado);
+	cout << "  |  ";
+	imprimirFila(graderia2_3, graderia2_3Pagado);
+	cout << endl << "              ";
+	imprimirFila(graderia1_4, graderia1_4Pagado);
+	cout << "  |  ";
+	imprimirFila(graderia2_4, graderia2_4Pagado);
+	cout << endl << "              ";
+	imprimirFila(graderia1_5, graderia1_5Pagado);
+	cout << "  |  ";
+	imprimirFila(graderia2_5, graderia2_5Pagado);
+	cout << endl << "              ";
+
+
+}
+
+void imprimirFila(Pila *fila, Pila *filaPago) {
+	int suma = fila->getLongitud() + filaPago->getLongitud();
+	int cantidad = 0;
+	int diferencia = 0;
+	Pila *temp = new Pila();
+	Espacio asiento;
+	//imprimir los asientos pagos.
+	for (int i = 0; i < filaPago->getLongitud();i++) {
+		asiento = filaPago->RetirarElemTope();
+		imprimirTipoEstado(asiento.GetEstado());
+		temp->insertarElem(asiento);
+	}
+	
+	for (int a = 0; a < temp->getLongitud();a++) {
+		asiento = temp->RetirarElemTope();
+		filaPago->insertarElem(asiento);
+	}
+	//imprimir los asientos reservador.
+	for (int i = 0; i < fila->getLongitud(); i++) {
+		asiento = fila->RetirarElemTope();
+		imprimirTipoEstado(asiento.GetEstado());
+		temp->insertarElem(asiento);
+	}
+
+	for (int a = 0; a < temp->getLongitud(); a++) {
+		asiento = temp->RetirarElemTope();
+		fila->insertarElem(asiento);
+	}
+	//En caso de que el resto de los asientos sean vacios se imprime la diferencia.
+	cantidad = fila->getLongitud() + filaPago->getLongitud();
+	diferencia = 10 - cantidad;
+	for (int e = 0; e < diferencia;e++) {
+		imprimirTipoEstado("Libre");
+	}
+}
+
+
+void imprimirTipoEstado(string estado) {
+
+	if (estado == "Pagado") {
+		cout << "P ";
+	}
+	else if (estado == "Reservado") {
+		cout << "R ";
+	}
+	else {
+		cout << "L ";
+	}
+
+}
+
+void imprimirRegulares() {
+
+
 }
