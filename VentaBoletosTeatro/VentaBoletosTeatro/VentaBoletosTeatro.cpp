@@ -34,6 +34,7 @@ void enviarACola();
 void atenderClienteCola();
 void ingresarVIP(string);
 void ingresarGeneral(string);
+void ingresarPreferencialDesdeCola(string);
 
 ListaEspacios *ListaVIP = new ListaEspacios();
 ListaEspacios *ListaGeneral = new ListaEspacios();
@@ -247,6 +248,7 @@ void reservarGraderia1(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	case 2:
@@ -257,6 +259,7 @@ void reservarGraderia1(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	case 3:
@@ -267,6 +270,7 @@ void reservarGraderia1(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	case 4:
@@ -277,6 +281,7 @@ void reservarGraderia1(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	case 5:
@@ -287,6 +292,7 @@ void reservarGraderia1(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	default:
@@ -306,6 +312,7 @@ void reservarGraderia2(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	case 2:
@@ -316,6 +323,7 @@ void reservarGraderia2(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 
 		break;
@@ -327,6 +335,7 @@ void reservarGraderia2(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	case 4:
@@ -337,6 +346,7 @@ void reservarGraderia2(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	case 5:
@@ -347,6 +357,7 @@ void reservarGraderia2(Espacio *temp, int fila, string nombre) {
 		}
 		else {
 			cout << "Lo sentimos esta fila esta llena." << endl;
+			enviarACola();
 		}
 		break;
 	default:
@@ -687,8 +698,7 @@ int conseguirTotalEspaciosPreferencialesPagos()
 
 double MontoTotalPreferencial()
 {
-	double total = conseguirTotalEspaciosPreferencialesPagos() * 5500;
-	return total;
+	return conseguirTotalEspaciosPreferencialesPagos() * 5500;
 }
 
 void enviarACola() {
@@ -734,7 +744,7 @@ void atenderClienteCola() {
 					ingresarVIP(nombre);
 					break;
 				case 2:
-					//ingresarPreferencial(nombre);
+					ingresarPreferencialDesdeCola(nombre);
 					break;
 				case 3:
 					ingresarGeneral(nombre);
@@ -789,4 +799,10 @@ void ingresarGeneral(string nombre) {
 	else {
 		cout << "\nLo sentimos los espacios de esta zona ya estan llenos" << endl;
 	}
+}
+
+void ingresarPreferencialDesdeCola(string nombre) {
+
+
+
 }
