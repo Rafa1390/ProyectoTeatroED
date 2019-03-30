@@ -982,27 +982,27 @@ void imprimirPreferenciales() {
 	
 	Pila *pilaTemp = new Pila();
 
-	cout << "              ";
+	cout << "                        ";
 	imprimirFila(graderia1_1, graderia1_1Pagado);
 	cout << "  |  ";
 	imprimirFila(graderia2_1, graderia2_1Pagado);
-	cout << endl << "              ";
+	cout << endl << "                        ";
 	imprimirFila(graderia1_2, graderia1_2Pagado);
 	cout << "  |  ";
 	imprimirFila(graderia2_2, graderia2_2Pagado);
-	cout << endl << "              ";
+	cout << endl << "                        ";
 	imprimirFila(graderia1_3, graderia1_3Pagado);
 	cout << "  |  ";
 	imprimirFila(graderia2_3, graderia2_3Pagado);
-	cout << endl << "              ";
+	cout << endl << "                        ";
 	imprimirFila(graderia1_4, graderia1_4Pagado);
 	cout << "  |  ";
 	imprimirFila(graderia2_4, graderia2_4Pagado);
-	cout << endl << "              ";
+	cout << endl << "                        ";
 	imprimirFila(graderia1_5, graderia1_5Pagado);
 	cout << "  |  ";
 	imprimirFila(graderia2_5, graderia2_5Pagado);
-	cout << endl << "              ";
+	cout << endl << "                        ";
 
 
 }
@@ -1037,7 +1037,7 @@ void imprimirFila(Pila *fila, Pila *filaPago) {
 	}
 	//En caso de que el resto de los asientos sean vacios se imprime la diferencia.
 	cantidad = fila->getLongitud() + filaPago->getLongitud();
-	diferencia = 10 - cantidad;
+	diferencia = 5 - cantidad;
 	for (int e = 0; e < diferencia;e++) {
 		imprimirTipoEstado("Libre");
 	}
