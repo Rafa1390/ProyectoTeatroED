@@ -975,7 +975,14 @@ void mostrarTeatro() {
 }
 
 void imprimirVIP() {
+	//Obtener espacio de lista VIP
+	Nodo * asiento = NULL;
 
+	asiento = ListaVIP->ObtenerAsiento(1);
+
+	Espacio espacio;
+
+	espacio = asiento->GetEspacio();
 }
 
 void imprimirPreferenciales() {
@@ -1056,6 +1063,12 @@ void imprimirTipoEstado(string estado) {
 }
 
 void imprimirRegulares() {
+	//Obtener espacio de lista general
+	Nodo * asiento = NULL;
 
+	asiento = ListaGeneral->ObtenerAsiento(1);
 
+	Espacio espacio;
+
+	espacio = asiento->GetEspacio();
 }

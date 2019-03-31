@@ -28,5 +28,6 @@ public:
 	void MostrarEspaciosGeneral(Nodo*);
 	bool IngresarVIP(int, string);
 	bool IngresarGeneral(string);
+	Nodo* ObtenerAsiento(int);
 };
 #endif // !LISTAESPACIOS_H

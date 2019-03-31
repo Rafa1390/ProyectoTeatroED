@@ -201,3 +201,17 @@ bool ListaEspacios::IngresarGeneral(string nombre) {
 
 	return realizado;
 }
+
+Nodo* ListaEspacios::ObtenerAsiento(int x) {
+	Nodo * aux = GetCabeza();
+	Nodo * info = NULL;
+
+	while (aux != NULL) {
+		if (aux->GetEspacio().GetNumEspacio() == x) {
+			info = aux;
+		}
+		aux = aux->GetSig();
+	}
+
+	return info;
+}
