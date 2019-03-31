@@ -40,7 +40,7 @@ void ingresarGraderia2PagoDesdeCola(string nombre, int fila);
 void mostrarTeatro();
 void imprimirVIP();
 void imprimirPreferenciales();
-void imprimirFila(Pila *fila, Pila *filaPago);
+void imprimirFilaPreferencial(Pila *fila, Pila *filaPago);
 void imprimirTipoEstado(string estado);
 void imprimirRegulares();
 
@@ -514,23 +514,23 @@ void pagarGraderia2(int fila, string nombre) {
 	switch (fila) {
 
 	case 1:
-		graderia2_1Pagado->insertarElem(graderia2_1->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia2_1, graderia2_1Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	case 2:
-		graderia2_2Pagado->insertarElem(graderia2_2->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia2_2, graderia2_2Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	case 3:
-		graderia2_3Pagado->insertarElem(graderia2_3->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia2_3, graderia2_3Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	case 4:
-		graderia2_4Pagado->insertarElem(graderia2_4->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia2_4, graderia2_4Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	case 5:
-		graderia2_5Pagado->insertarElem(graderia2_5->RetirarElemTope());
+		realizarPagoGraderiaEnFila(graderia2_5, graderia2_5Pagado, nombre);
 		cout << "Pago realizado" << endl;
 		break;
 	default:
@@ -980,34 +980,31 @@ void imprimirVIP() {
 
 void imprimirPreferenciales() {
 	
-	Pila *pilaTemp = new Pila();
-
 	cout << "                        ";
-	imprimirFila(graderia1_1, graderia1_1Pagado);
+	imprimirFilaPreferencial(graderia1_1, graderia1_1Pagado);
 	cout << "  |  ";
-	imprimirFila(graderia2_1, graderia2_1Pagado);
+	imprimirFilaPreferencial(graderia2_1, graderia2_1Pagado);
 	cout << endl << "                        ";
-	imprimirFila(graderia1_2, graderia1_2Pagado);
+	imprimirFilaPreferencial(graderia1_2, graderia1_2Pagado);
 	cout << "  |  ";
-	imprimirFila(graderia2_2, graderia2_2Pagado);
+	imprimirFilaPreferencial(graderia2_2, graderia2_2Pagado);
 	cout << endl << "                        ";
-	imprimirFila(graderia1_3, graderia1_3Pagado);
+	imprimirFilaPreferencial(graderia1_3, graderia1_3Pagado);
 	cout << "  |  ";
-	imprimirFila(graderia2_3, graderia2_3Pagado);
+	imprimirFilaPreferencial(graderia2_3, graderia2_3Pagado);
 	cout << endl << "                        ";
-	imprimirFila(graderia1_4, graderia1_4Pagado);
+	imprimirFilaPreferencial(graderia1_4, graderia1_4Pagado);
 	cout << "  |  ";
-	imprimirFila(graderia2_4, graderia2_4Pagado);
+	imprimirFilaPreferencial(graderia2_4, graderia2_4Pagado);
 	cout << endl << "                        ";
-	imprimirFila(graderia1_5, graderia1_5Pagado);
+	imprimirFilaPreferencial(graderia1_5, graderia1_5Pagado);
 	cout << "  |  ";
-	imprimirFila(graderia2_5, graderia2_5Pagado);
+	imprimirFilaPreferencial(graderia2_5, graderia2_5Pagado);
 	cout << endl << "                        ";
-
 
 }
 
-void imprimirFila(Pila *fila, Pila *filaPago) {
+void imprimirFilaPreferencial(Pila *fila, Pila *filaPago) {
 	int suma = fila->getLongitud() + filaPago->getLongitud();
 	int cantidad = 0;
 	int diferencia = 0;
