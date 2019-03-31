@@ -977,12 +977,17 @@ void mostrarTeatro() {
 void imprimirVIP() {
 	//Obtener espacio de lista VIP
 	Nodo * asiento = NULL;
-
-	asiento = ListaVIP->ObtenerAsiento(1);
-
-	Espacio espacio;
-
-	espacio = asiento->GetEspacio();
+	cout << "                           ";
+	for (int i = 0; i < 10;i++) {
+		asiento = ListaVIP->ObtenerAsiento(i);
+		if (asiento == NULL) {
+			cout << "L ";
+		}
+		else {
+			imprimirTipoEstado(asiento->GetEspacio().GetEstado());
+		}
+	}
+	cout << endl;
 }
 
 void imprimirPreferenciales() {
@@ -1065,10 +1070,17 @@ void imprimirTipoEstado(string estado) {
 void imprimirRegulares() {
 	//Obtener espacio de lista general
 	Nodo * asiento = NULL;
-
-	asiento = ListaGeneral->ObtenerAsiento(1);
-
-	Espacio espacio;
-
-	espacio = asiento->GetEspacio();
+	for (int i = 0; i < 50; i++) {
+		if (i%10 == 0) {
+			cout << endl << "                           ";
+		}
+		asiento = ListaVIP->ObtenerAsiento(i);
+		if (asiento == NULL) {
+			cout << "L ";
+		}
+		else {
+			imprimirTipoEstado(asiento->GetEspacio().GetEstado());
+		}
+	}
+	cout << endl;
 }
