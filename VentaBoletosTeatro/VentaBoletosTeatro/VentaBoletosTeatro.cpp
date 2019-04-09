@@ -87,7 +87,7 @@ int main()
 			<< "5. Mostrar espacios" << endl
 			<< "6. Atender clientes en cola" << endl
 			<< "7. Mostrar teatro./Extra" << endl
-			<< "8. Mostrar teatro(modo grafico)./extra" << endl
+			<< "8. Mostrar teatro(modo grafico)./No implementado" << endl
 			<< "9. Salir." << endl << endl
 			<< "============================" << endl;
 
@@ -379,7 +379,7 @@ void reservarGeneral() {
 	int num;
 
 	cout << "\n---General---" << endl;
-	if (ListaGeneral->GetLong() < 50) {
+	if (ListaGeneral->GetLong() <= 50) {
 		cout << "\nDigite el nombre de quien realiza la reserva" << endl;
 		cin >> nombre;
 		Espacio espacio(contGradGeneral, "Reservado", "General", 4000, nombre);
@@ -977,7 +977,7 @@ void imprimirVIP() {
 	//Obtener espacio de lista VIP
 	Nodo * asiento = NULL;
 	cout << "                           ";
-	for (int i = 0; i < 10;i++) {
+	for (int i = 1; i < 11;i++) {
 		asiento = ListaVIP->ObtenerAsiento(i);
 		if (asiento == NULL) {
 			cout << "L ";
@@ -1069,11 +1069,26 @@ void imprimirTipoEstado(string estado) {
 void imprimirRegulares() {
 	//Obtener espacio de lista general
 	Nodo * asiento = NULL;
-	for (int i = 0; i < 50; i++) {
-		if (i%10 == 0) {
+	for (int i = 1; i <= 50; i++) {
+		/*if (i%10 == 0) {
+			cout << endl << "                           ";
+		}*/
+		if (i == 1) {
 			cout << endl << "                           ";
 		}
-		asiento = ListaVIP->ObtenerAsiento(i);
+		if (i == 11) {
+			cout << endl << "                           ";
+		}
+		if (i == 21) {
+			cout << endl << "                           ";
+		}
+		if (i == 31) {
+			cout << endl << "                           ";
+		}
+		if (i == 41) {
+			cout << endl << "                           ";
+		}
+		asiento = ListaGeneral->ObtenerAsiento(i);
 		if (asiento == NULL) {
 			cout << "L ";
 		}
